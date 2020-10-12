@@ -13,6 +13,7 @@ public class Teleporter : MonoBehaviour
     private bool hasPosition = false;
     private bool isTeleporting = false;
     [SerializeField] private float fadeTime = 0.5f;
+    private bool showPointer = false;
 
     private void Awake()
     {
@@ -23,10 +24,15 @@ public class Teleporter : MonoBehaviour
     void Update()
     {
         hasPosition = UpdatePointer();
-        pointer.SetActive(hasPosition);
+        pointer.SetActive(hasPosition && showPointer);
 
+        if (teleportAction.GetStateDown(pose.inputSource))
+        {
+            showPointer = true;
+        }
         if (teleportAction.GetStateUp(pose.inputSource))
         {
+            showPointer = false;
             TryTeleport();
         }
     }
