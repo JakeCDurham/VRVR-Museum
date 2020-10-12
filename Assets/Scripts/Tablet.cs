@@ -22,6 +22,9 @@ public class Tablet : MonoBehaviour
         float height = 0.5f;
         float width = height * 2f;
         GameObject parent = new GameObject();
+        parent.AddComponent<MyInteractable>();
+        BoxCollider parentBox = parent.AddComponent<BoxCollider>();
+        Rigidbody parentRigidBody = parent.AddComponent<Rigidbody>();
         parent.transform.position = new Vector3(0, height*2f, 0);
 
         GameObject tablet = Instantiate(screenPrefab, new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
