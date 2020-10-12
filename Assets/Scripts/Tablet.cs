@@ -22,14 +22,12 @@ public class Tablet : MonoBehaviour
         float height = 0.5f;
         float width = height * 2f;
         GameObject parent = new GameObject();
-        parent.AddComponent<MyInteractable>();
-        BoxCollider parentBox = parent.AddComponent<BoxCollider>();
-        Rigidbody parentRigidBody = parent.AddComponent<Rigidbody>();
         parent.transform.position = new Vector3(0, height*2f, 0);
 
         GameObject tablet = Instantiate(screenPrefab, new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
         tablet.transform.localScale = new Vector3(height/50f, height, width);
         tablet.transform.localPosition = new Vector3(0, 0, 0);
+        tablet.AddComponent<Rigidbody>();
 
         TMP_Text text = Instantiate(textPrefab, new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
         RectTransform container = text.GetComponent<RectTransform>();
@@ -45,14 +43,30 @@ public class Tablet : MonoBehaviour
         GameObject handleLeft = Instantiate(handlePrefab, new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
         handleLeft.transform.localScale = new Vector3(height/5f, height/2f, height/5f);
         handleLeft.transform.localPosition = new Vector3(0, 0, -width/2f);
+        makeInteractable(handleLeft);
         
 
         GameObject handleRight = Instantiate(handlePrefab, new Vector3(0, 0, 0), Quaternion.identity, parent.transform);
         handleRight.transform.localScale = new Vector3(height/5f, height/2f, height/5f);
         handleRight.transform.localPosition = new Vector3(0, 0, width/2f);
+        makeInteractable(handleRight);
         
-        
+        handleLeft.AddComponent<FixedJoint>();
+        handleLeft.GetComponent<FixedJoint>().connectedBody = tablet.GetComponent<Rigidbody>();
+        handleRight.AddComponent<FixedJoint>();
+        handleRight.GetComponent<FixedJoint>().connectedBody = tablet.GetComponent<Rigidbody>();
+        text.AddComponent<FixedJoint>();
+        text.GetComponent<FixedJoint>().connectedBody = tablet.GetComponent<Rigidbody>();
+
+
         tabletObjects.Add(parent);
+    }
+
+    void makeInteractable(GameObject obj) {
+        obj.AddComponent<BoxCollider>();
+        obj.AddComponent<MyInteractable>();
+        obj.AddComponent<Rigidbody>();
+        obj.tag = "interactable";
     }
 
     // Update is called once per frame
