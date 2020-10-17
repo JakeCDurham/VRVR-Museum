@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589716624622244570}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.0209999}
   m_LocalScale: {x: 0.1, y: 0.25, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7642114487078311726}
@@ -121,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3279211567765091640}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.502}
+  m_LocalPosition: {x: 0, y: 0, z: 0.51899993}
   m_LocalScale: {x: 0.01, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 7642114487078311726}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 1597433039015939886}
   - component: {fileID: 5582091112301753082}
   m_Layer: 0
-  m_Name: Tablet
+  m_Name: Tablet R
   m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,8 +265,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.07862133, y: 0.510769, z: 1.1050673}
-  m_Center: {x: 0.0029723346, y: -0.005525291, z: -0.4995072}
+  m_Size: {x: 0.508619, y: 0.0793519, z: 1.0939586}
+  m_Center: {x: -0.00951615, y: 0.00011599064, z: 0.5247444}
 --- !u!1 &5467548462176025181
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5467548462176025181}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.020999908}
   m_LocalScale: {x: 0.1, y: 0.25, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7642114487078311726}
@@ -418,7 +418,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7801074591811619364}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: -0.502}
+  m_LocalPosition: {x: 0, y: 0, z: 0.519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7642114487078311726}
