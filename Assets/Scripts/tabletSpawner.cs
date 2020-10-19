@@ -52,7 +52,9 @@ public class tabletSpawner : MonoBehaviour
     {
         if(isOn) {
             if (currentTablet.transform.position != initialTabletPos) {
+                // user moved the tablet from the spawner
                 isOn = false;
+                currentTablet.GetComponent<Rigidbody>().useGravity = true;
             }
         }
         

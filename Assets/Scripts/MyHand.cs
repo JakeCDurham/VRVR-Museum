@@ -36,6 +36,7 @@ public class MyHand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // check interactable tag and that collider is on the specific object
         if (other.gameObject.CompareTag("interactable"))
         {
             contactInteractables.Add(other.GetComponent<MyInteractable>());
@@ -63,9 +64,16 @@ public class MyHand : MonoBehaviour
             currentInteractable.activeHand.Drop();
         }
 
-        currentInteractable.transform.position = transform.position;
+        Vector3 graboffset = -currentInteractable.grabbedOffset;
+
+        GameObject toGrab = currentInteractable.gameObject;
+        if(currentInteractable.target) {
+            toGrab = currentInteractable.target;
+        }
+
+        toGrab.transform.position = transform.position + graboffset;
         
-        joint.connectedBody = currentInteractable.GetComponent<Rigidbody>();
+        joint.connectedBody = toGrab.GetComponent<Rigidbody>();
 
         currentInteractable.activeHand = this;
     }
@@ -77,7 +85,12 @@ public class MyHand : MonoBehaviour
             return;
         }
 
-        Rigidbody target = currentInteractable.GetComponent<Rigidbody>();
+        Rigidbody target;
+        if(currentInteractable.target) {
+            target =  currentInteractable.target.GetComponent<Rigidbody>();  
+        } else {
+            target = currentInteractable.GetComponent<Rigidbody>();
+        }
 
         target.velocity = pose.GetVelocity();
         target.angularVelocity = pose.GetAngularVelocity();
