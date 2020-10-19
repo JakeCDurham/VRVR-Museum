@@ -9,6 +9,8 @@ public class tabletSpawner : MonoBehaviour
     GameObject currentTablet;
     Vector3 initialTabletPos;
     bool isOn;
+    bool leftIn;
+    bool rightIn;
     public GameObject tabletPrefab;
     public string text;
 
@@ -20,27 +22,26 @@ public class tabletSpawner : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("leftHand") || other.gameObject.CompareTag("rightHand")) {
-            if (!isOn) {
-                isOn = true;
-                currentTablet = createTablet();
-            }
+        if (other.gameObject.CompareTag("leftHand")) {
+            leftIn = true;
+        } else if(other.gameObject.CompareTag("rightHand")) {
+            rightIn = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("leftHand") || other.gameObject.CompareTag("rightHand")) {
-            if (isOn) {
-                isOn = false;
-            }
+        if (other.gameObject.CompareTag("leftHand")) {
+            leftIn = false;
+        } else if(other.gameObject.CompareTag("rightHand")) {
+            rightIn = false;
         }
     }
 
     GameObject createTablet()
     {
         GameObject tablet = Instantiate(tabletPrefab, transform.position + transform.up, transform.rotation);
-        tablet.GetComponent<Rigidbody>().useGravity = false;
+        tablet.GetComponent<Rigidbody>().isKinematic = true;
         tablet.GetComponent<Rigidbody>().velocity = Vector3.zero;
         initialTabletPos = tablet.transform.position;
         tabletObjects.Add(tablet);
@@ -51,12 +52,26 @@ public class tabletSpawner : MonoBehaviour
     void Update()
     {
         if(isOn) {
-            if (currentTablet.transform.position != initialTabletPos) {
+            bool isGrabbed = false;
+            for(int i = 0; i < currentTablet.gameObject.transform.childCount; i++) {
+                GameObject child = currentTablet.gameObject.transform.GetChild(i).gameObject;
+                if (child.GetComponent<MyInteractable>() != null && child.GetComponent<MyInteractable>().activeHand != null) {
+                    isGrabbed = true;
+                }
+            }   
+            if (isGrabbed) {
                 // user moved the tablet from the spawner
                 isOn = false;
-                currentTablet.GetComponent<Rigidbody>().useGravity = true;
+                currentTablet.GetComponent<Rigidbody>().isKinematic = false;
+                // turn down gravity
+                Vector3 newForce = -Physics.gravity * currentTablet.GetComponent<Rigidbody>().mass;
+                currentTablet.GetComponent<Rigidbody>().AddForce(newForce);
             }
         }
         
+        if (!isOn && (leftIn || rightIn)) {
+                isOn = true;
+                currentTablet = createTablet();
+            }
     }
 }

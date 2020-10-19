@@ -65,6 +65,7 @@ public class MyHand : MonoBehaviour
         }
 
         Vector3 graboffset = -currentInteractable.grabbedOffset;
+        graboffset = currentInteractable.transform.rotation * graboffset;
 
         GameObject toGrab = currentInteractable.gameObject;
         if(currentInteractable.target) {
