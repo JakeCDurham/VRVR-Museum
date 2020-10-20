@@ -40,8 +40,8 @@ public class tabletSpawner : MonoBehaviour
 
     GameObject createTablet()
     {
-        GameObject tablet = Instantiate(tabletPrefab, transform.position + transform.up, transform.rotation);
-        tablet.GetComponent<Rigidbody>().isKinematic = true;
+        GameObject tablet = Instantiate(tabletPrefab, (transform.position + transform.up * 0.5f) - transform.forward * 0.5f, transform.rotation);
+
         tablet.GetComponent<Rigidbody>().velocity = Vector3.zero;
         initialTabletPos = tablet.transform.position;
         tabletObjects.Add(tablet);
@@ -59,13 +59,11 @@ public class tabletSpawner : MonoBehaviour
                     isGrabbed = true;
                 }
             }   
-            if (isGrabbed) {
+            if (isGrabbed || ((currentTablet.gameObject.transform.position - transform.position).sqrMagnitude > 2)) {
                 // user moved the tablet from the spawner
                 isOn = false;
-                currentTablet.GetComponent<Rigidbody>().isKinematic = false;
-                // turn down gravity
-                Vector3 newForce = -Physics.gravity * currentTablet.GetComponent<Rigidbody>().mass;
-                currentTablet.GetComponent<Rigidbody>().AddForce(newForce);
+                // turn on light gravity
+                currentTablet.GetComponent<Tablet>().isActive = true;
             }
         }
         
