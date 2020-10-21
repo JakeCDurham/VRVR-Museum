@@ -306,7 +306,7 @@ Transform:
   m_LocalScale: {x: 2, y: 0.25, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &94458657
 GameObject:
@@ -973,13 +973,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270539180}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 668374164}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1096022221}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &278474530
 GameObject:
@@ -1478,7 +1478,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &310707675
 GameObject:
@@ -1850,7 +1850,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &382161362
 GameObject:
@@ -3479,7 +3479,7 @@ PrefabInstance:
     - target: {fileID: 8041203292928185941, guid: f02e0664b0e1cf546b657a9d6018faff,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8041203292928185941, guid: f02e0664b0e1cf546b657a9d6018faff,
         type: 3}
@@ -4327,7 +4327,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1427421f6c515974091cefadb973cfa0, type: 2}
+  - {fileID: 2100000, guid: 5f494f4a46a8b1045b9a7f3a84248515, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5071,6 +5071,7 @@ Transform:
   - {fileID: 203540772}
   - {fileID: 1726204510}
   - {fileID: 1943987865}
+  - {fileID: 270539181}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7771,7 +7772,7 @@ PrefabInstance:
     - target: {fileID: 3455394171676133174, guid: 631ea2a0f4f7697479b4b7b9eb69376f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3455394171676133174, guid: 631ea2a0f4f7697479b4b7b9eb69376f,
         type: 3}
@@ -9104,7 +9105,7 @@ PrefabInstance:
     - target: {fileID: 8041203292928185941, guid: f02e0664b0e1cf546b657a9d6018faff,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8041203292928185941, guid: f02e0664b0e1cf546b657a9d6018faff,
         type: 3}
