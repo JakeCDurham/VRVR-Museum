@@ -11,6 +11,7 @@ public class Rotater : MonoBehaviour
     private SteamVR_Behaviour_Pose pose;
     [SerializeField] private float rotateAngle = 15f;
     [SerializeField] private GameObject Player;
+    [SerializeField] private MenuTextUpdater menuUpdater;
 
     private void Start()
     {
@@ -26,6 +27,24 @@ public class Rotater : MonoBehaviour
         if (rightAction.GetStateDown(pose.inputSource))
         {
             Player.transform.Rotate(new Vector3(0, rotateAngle, 0));
+        }
+    }
+
+    public void IncreaseRotation(float amount)
+    {
+        rotateAngle += amount;
+        if (menuUpdater != null)
+        {
+            menuUpdater.UpdateValue(rotateAngle.ToString());
+        }
+    }
+
+    public void DecreaseRotation(float amount)
+    {
+        rotateAngle -= amount;
+        if (menuUpdater != null)
+        {
+            menuUpdater.UpdateValue(rotateAngle.ToString());
         }
     }
 }

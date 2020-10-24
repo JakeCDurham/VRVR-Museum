@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 674781851005229958}
   - component: {fileID: 996826177}
   - component: {fileID: 996826170}
+  - component: {fileID: 2624905433107528009}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: leftHand
@@ -264,6 +265,25 @@ MonoBehaviour:
     needsReinit: 0
   rotateAngle: 15
   Player: {fileID: 674781850230049558}
+--- !u!114 &2624905433107528009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674781850229805632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69949bc44c5b74b4ca9c1ae60895fcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuAction:
+    actionPath: /actions/default/in/ToggleMenu
+    needsReinit: 0
+  uiPointer: {fileID: 4731365948929888502}
+  menuMarker: {fileID: 0}
+  returnMarker: {fileID: 0}
+  fadeTime: 0.5
 --- !u!1 &674781850229999474
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,6 +1007,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97f4c2355a99cfe49b47f75067083f04, type: 3}
+--- !u!1 &4731365948929888502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2199760545970055268, guid: 97f4c2355a99cfe49b47f75067083f04,
+    type: 3}
+  m_PrefabInstance: {fileID: 6858470738608699538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8630886104796205778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947957677832350272, guid: 97f4c2355a99cfe49b47f75067083f04,
