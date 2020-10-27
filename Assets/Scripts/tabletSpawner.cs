@@ -13,10 +13,12 @@ public class tabletSpawner : MonoBehaviour
     bool rightIn;
     public GameObject tabletPrefab;
     public string text;
+    private Camera UICam;
 
     // Start is called  the first frame update
     void Start()
     {
+        UICam = GameObject.FindGameObjectWithTag("rightHand").GetComponentInChildren<Camera>();
         isOn = false;
         tabletObjects = new List<GameObject>();
     }
@@ -43,6 +45,8 @@ public class tabletSpawner : MonoBehaviour
         GameObject tablet = Instantiate(tabletPrefab, (transform.position + transform.up * 0.5f) - transform.forward * 0.5f, transform.rotation);
 
         tablet.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Canvas TabletCam = tablet.GetComponentInChildren<Canvas>();
+        TabletCam.worldCamera = UICam;
         initialTabletPos = tablet.transform.position;
         tabletObjects.Add(tablet);
         return tablet;   

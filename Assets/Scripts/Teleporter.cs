@@ -8,16 +8,17 @@ public class Teleporter : MonoBehaviour
 {
     [SerializeField] private GameObject pointer;
     public SteamVR_Action_Boolean teleportAction;
-
     private SteamVR_Behaviour_Pose pose = null;
     private bool hasPosition = false;
     private bool isTeleporting = false;
     [SerializeField] private float fadeTime = 0.5f;
     private bool showPointer = false;
+    private LineRenderer lineRenderer;
 
     private void Awake()
     {
         pose = GetComponent<SteamVR_Behaviour_Pose>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -49,6 +50,9 @@ public class Teleporter : MonoBehaviour
         
         Vector3 groundPosition = new Vector3(headPosition.x, cameraRig.position.y, headPosition.z);
         Vector3 translateVec = pointer.transform.position - groundPosition;
+        
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position);
 
         StartCoroutine(MoveRig(cameraRig, translateVec));
     }
@@ -70,9 +74,19 @@ public class Teleporter : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+            if (showPointer)
+            {
+                lineRenderer.startWidth = 0.001f;
+                lineRenderer.endWidth = 0.01f;
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, pointer.transform.position);
+            }
+
             pointer.transform.position = hit.point;
             return true;
         }
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position);
         return false;
     }
 }
