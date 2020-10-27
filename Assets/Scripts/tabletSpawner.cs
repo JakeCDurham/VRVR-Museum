@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class tabletSpawner : MonoBehaviour
 {
@@ -42,13 +43,15 @@ public class tabletSpawner : MonoBehaviour
 
     GameObject createTablet()
     {
-        GameObject tablet = Instantiate(tabletPrefab, (transform.position + transform.up * 0.5f) - transform.forward * 0.5f, transform.rotation);
+        GameObject tablet = Instantiate(tabletPrefab, (transform.position + transform.up * 0.3f) + transform.forward * 0.5f, transform.rotation);
 
         tablet.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Canvas TabletCam = tablet.GetComponentInChildren<Canvas>();
         TabletCam.worldCamera = UICam;
         initialTabletPos = tablet.transform.position;
         tabletObjects.Add(tablet);
+        TextMeshProUGUI textElement = tablet.GetComponentInChildren<TextMeshProUGUI>();
+        textElement.text = text.Replace("\\n", "\n");
         return tablet;   
     }
 

@@ -267,6 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f360014b93e449a4aa6ee7604e3a7e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!1 &5467548462176025181
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +385,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7642114487078311726}
     m_Modifications:
+    - target: {fileID: 8523339052391700989, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339052391700989, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_Size
+      value: 0.99999994
+      objectReference: {fileID: 0}
     - target: {fileID: 8523339052391700990, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -393,6 +404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339052391700991, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8523339052522490063, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
@@ -414,6 +430,76 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8523339052968700452, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_text
+      value: 'Default text
+
+        Should saucy sharks seek shelter soon?
+
+
+
+        The
+        sixth sick shiek''s sixth sheep''s sick.
+
+
+
+        She sits and shines shoes,
+
+        And
+        when she sits she shines all day.
+
+
+
+        A skunk sat on a stump.
+
+        The
+        skunk thought the stump stunk.
+
+        The stump thought the skunk stunk.
+
+
+
+        Sister
+        Suzy''s sewing shirts for soldiers.
+
+        Such skill at sewing shirts
+
+        my
+        shy young sister Suzy shows.
+
+        Some soldiers send epistles
+
+        Saying
+        they''d sooner sleep on thistles
+
+        Than the short serge shirts for
+        soldiers
+
+        shy young sister Suzy sews.
+
+
+
+        Sister Susie went
+        to sea
+
+        To see the sea, you see.
+
+        The sea she saw was a saucy
+        sea,
+
+        A sort of saucy sea saw she.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053135973060, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.9997613
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053135973060, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_Size
+      value: 0.35729238
+      objectReference: {fileID: 0}
     - target: {fileID: 8523339053135973061, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -422,6 +508,16 @@ PrefabInstance:
     - target: {fileID: 8523339053135973061, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053135973061, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053135973061, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053281524560, guid: 8b83e81c233a7a34ebf49a766a57c387,
@@ -457,7 +553,7 @@ PrefabInstance:
     - target: {fileID: 8523339053428463126, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.497
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053428463126, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
@@ -502,12 +598,12 @@ PrefabInstance:
     - target: {fileID: 8523339053428463126, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.011
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053428463126, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0188
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053428463126, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
@@ -548,6 +644,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053428463126, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053441065983, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053441065983, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.20776367
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523339053441065983, guid: 8b83e81c233a7a34ebf49a766a57c387,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053641605360, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
