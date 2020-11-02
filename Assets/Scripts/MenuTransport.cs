@@ -37,13 +37,13 @@ public class MenuTransport : MonoBehaviour
         {
             Vector3 translateVec = menuMarker.transform.position - groundPosition;
             returnMarker.transform.position = groundPosition;
-            uiPointer.SetActive(true);
+            //uiPointer.SetActive(true);
             StartCoroutine(MoveRig(cameraRig, translateVec));
         }
         else
         {
             Vector3 translateVec = returnMarker.transform.position - groundPosition;
-            uiPointer.SetActive(false);
+            //uiPointer.SetActive(false);
             StartCoroutine(MoveRig(cameraRig, translateVec));
         }
 

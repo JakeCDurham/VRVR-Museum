@@ -16,19 +16,24 @@ public class PlayVideoExample : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            if(vp.isPlaying)
-            {
-                vp.Pause();
-            }
-            else
-            {
-                vp.Play();
-            }
+            TogglePlay();
         }
 
         if(Input.GetKeyDown(KeyCode.R))
         {
             vp.Stop();
+            vp.Play();
+        }
+    }
+
+    public void TogglePlay()
+    {
+        if(vp.isPlaying)
+        {
+            vp.Pause();
+        }
+        else
+        {
             vp.Play();
         }
     }

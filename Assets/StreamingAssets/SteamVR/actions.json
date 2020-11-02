@@ -55,6 +55,10 @@
       "requirement": "suggested"
     },
     {
+      "name": "/actions/default/in/Ybutton",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

@@ -316,6 +316,24 @@
                },
                "mode" : "button",
                "path" : "/user/hand/right/input/x"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/ybutton"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/y"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/ybutton"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/y"
             }
          ]
       },
