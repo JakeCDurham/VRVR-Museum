@@ -69,7 +69,7 @@ public class Teleporter : MonoBehaviour
 
     private bool UpdatePointer()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(transform.position, (transform.forward + transform.up * -1).normalized);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
