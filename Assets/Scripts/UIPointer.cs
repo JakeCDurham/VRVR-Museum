@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Valve.VR;
 
 public class UIPointer : MonoBehaviour
 {
     public float defaultLength = 5f;
     public GameObject dot;
     public UIInput uiInput;
+    public SteamVR_Action_Boolean RightAction;
+    public SteamVR_Action_Boolean LeftAction;
+    [SerializeField] private SteamVR_Behaviour_Pose Leftpose = null;
+    [SerializeField] private SteamVR_Behaviour_Pose Rightpose = null;
 
     private LineRenderer linerenderer = null;
     private void Awake()
@@ -20,6 +25,21 @@ public class UIPointer : MonoBehaviour
     void Update()
     {
         UpdateLine();
+
+        if (LeftAction.GetStateDown(Leftpose.inputSource))
+        {
+            transform.parent = Leftpose.gameObject.transform;
+            transform.localPosition = new Vector3(0,0,0);
+            transform.localRotation = new Quaternion();
+            transform.localEulerAngles = new Vector3(45, 0, 0);
+        }
+        else if (RightAction.GetStateDown(Rightpose.inputSource))
+        {
+            transform.parent = Rightpose.gameObject.transform;
+            transform.localPosition = new Vector3(0,0,0);
+            transform.localRotation = new Quaternion();
+            transform.localEulerAngles = new Vector3(45, 0, 0);
+        }
     }
 
     private void UpdateLine()
