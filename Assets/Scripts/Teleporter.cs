@@ -19,6 +19,7 @@ public class Teleporter : MonoBehaviour
     {
         pose = GetComponent<SteamVR_Behaviour_Pose>();
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 101;
     }
 
     // Update is called once per frame
@@ -76,17 +77,48 @@ public class Teleporter : MonoBehaviour
         {
             if (showPointer)
             {
-                lineRenderer.startWidth = 0.001f;
-                lineRenderer.endWidth = 0.01f;
-                lineRenderer.SetPosition(0, transform.position);
-                lineRenderer.SetPosition(1, pointer.transform.position);
+                lineRenderer.startWidth = 0.01f;
+                lineRenderer.endWidth = 0.1f;
+                //lineRenderer.SetPosition(0, transform.position);
+                //lineRenderer.SetPosition(1, pointer.transform.position);
+                // y=ai^2+bi+c
+                // x = delta x * i
+                // z = delta z * i
+                float deltaX = (pointer.transform.position.x - transform.position.x) / 100;
+                float deltaZ = (pointer.transform.position.z - transform.position.z) / 100;
+                float h = transform.position.y - pointer.transform.position.y;
+                float l = Vector3.Distance(
+                    new Vector3(transform.position.x, pointer.transform.position.y, transform.position.z),
+                    pointer.transform.position);
+                float a = -(h / 1000 * l);
+                float b = -(h / l) + -a * l;
+                float c = h;
+                Vector3 origin = new Vector3(transform.position.x,  pointer.transform.position.y , transform.position.z);
+                for (int i = 0; i < 100; i++)
+                {
+                    float x = i * deltaX;
+                    float y = a * Mathf.Pow(i * l/100, 2) + b * i * l/100 + c;
+                    float z = i * deltaZ;
+                    lineRenderer.SetPosition(i, origin + new Vector3(x, y, z));
+                }
+                lineRenderer.SetPosition(100, pointer.transform.position);
+            }
+            else
+            {
+                for (int i = 0; i < 101; i++)
+                {
+                    lineRenderer.SetPosition(i, transform.position);
+                }
             }
 
             pointer.transform.position = hit.point;
             return true;
         }
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, transform.position);
+
+        for (int i = 0; i < 101; i++)
+        {
+            lineRenderer.SetPosition(i, transform.position);
+        }
         return false;
     }
 }
