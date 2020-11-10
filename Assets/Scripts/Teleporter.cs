@@ -14,12 +14,15 @@ public class Teleporter : MonoBehaviour
     [SerializeField] private float fadeTime = 0.5f;
     private bool showPointer = false;
     private LineRenderer lineRenderer;
+    [Range(1,1000000)][SerializeField] private float archSmoothness = 500f;
+    [Range(2,10000)][SerializeField] private int archResolution = 100;
+    
 
     private void Awake()
     {
         pose = GetComponent<SteamVR_Behaviour_Pose>();
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 101;
+        lineRenderer.positionCount = archResolution + 1;
     }
 
     // Update is called once per frame
@@ -84,28 +87,28 @@ public class Teleporter : MonoBehaviour
                 // y=ai^2+bi+c
                 // x = delta x * i
                 // z = delta z * i
-                float deltaX = (pointer.transform.position.x - transform.position.x) / 100;
-                float deltaZ = (pointer.transform.position.z - transform.position.z) / 100;
+                float deltaX = (pointer.transform.position.x - transform.position.x) / archResolution;
+                float deltaZ = (pointer.transform.position.z - transform.position.z) / archResolution;
                 float h = transform.position.y - pointer.transform.position.y;
                 float l = Vector3.Distance(
                     new Vector3(transform.position.x, pointer.transform.position.y, transform.position.z),
                     pointer.transform.position);
-                float a = -(h / 1000 * l);
+                float a = -(h / archSmoothness * l);
                 float b = -(h / l) + -a * l;
                 float c = h;
                 Vector3 origin = new Vector3(transform.position.x,  pointer.transform.position.y , transform.position.z);
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < archResolution; i++)
                 {
                     float x = i * deltaX;
-                    float y = a * Mathf.Pow(i * l/100, 2) + b * i * l/100 + c;
+                    float y = a * Mathf.Pow(i * l/archResolution, 2) + b * i * l/archResolution + c;
                     float z = i * deltaZ;
                     lineRenderer.SetPosition(i, origin + new Vector3(x, y, z));
                 }
-                lineRenderer.SetPosition(100, pointer.transform.position);
+                lineRenderer.SetPosition(archResolution, pointer.transform.position);
             }
             else
             {
-                for (int i = 0; i < 101; i++)
+                for (int i = 0; i < archResolution + 1; i++)
                 {
                     lineRenderer.SetPosition(i, transform.position);
                 }
@@ -115,7 +118,7 @@ public class Teleporter : MonoBehaviour
             return true;
         }
 
-        for (int i = 0; i < 101; i++)
+        for (int i = 0; i < archResolution + 1; i++)
         {
             lineRenderer.SetPosition(i, transform.position);
         }
