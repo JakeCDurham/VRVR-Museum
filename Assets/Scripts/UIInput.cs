@@ -11,6 +11,9 @@ public class UIInput : BaseInputModule
     public Camera camera;
     public SteamVR_Input_Sources source;
     public SteamVR_Action_Boolean clickAction;
+    public SteamVR_Action_Vector2 scrollAction;
+    [SerializeField] private float scrollSpeed = 10f;
+    [SerializeField] private List<Teleporter> teleporters;
 
     private GameObject currentObject;
     private PointerEventData data;
@@ -49,6 +52,27 @@ public class UIInput : BaseInputModule
         if (clickAction.GetStateUp(source))
         {
             ProcessRelease(data);
+        }
+
+        if (currentObject != null)
+        {
+            foreach (Teleporter T in teleporters)
+            {
+                T.usingUI = true;
+            }
+            if (scrollAction.changed)
+            {
+                //Debug.Log(scrollAction.axis);
+                data.scrollDelta = scrollAction.axis * scrollSpeed;
+                ExecuteEvents.ExecuteHierarchy(currentObject, data, ExecuteEvents.scrollHandler);
+            }
+        }
+        else
+        {
+            foreach (Teleporter T in teleporters)
+            {
+                T.usingUI = false;
+            }
         }
 
     }

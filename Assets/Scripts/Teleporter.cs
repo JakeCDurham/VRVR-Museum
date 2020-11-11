@@ -16,6 +16,7 @@ public class Teleporter : MonoBehaviour
     private LineRenderer lineRenderer;
     [Range(1,1000000)][SerializeField] private float archSmoothness = 500f;
     [Range(2,10000)][SerializeField] private int archResolution = 100;
+    [HideInInspector] public bool usingUI = false;
     
 
     private void Awake()
@@ -29,13 +30,20 @@ public class Teleporter : MonoBehaviour
     void Update()
     {
         hasPosition = UpdatePointer();
-        pointer.SetActive(hasPosition && showPointer);
-
+        pointer.SetActive(hasPosition && showPointer && !usingUI);
+        
+        if (usingUI)
+        {
+            showPointer = false;
+            return;
+        }
+        
         if (teleportAction.GetStateDown(pose.inputSource))
         {
             showPointer = true;
         }
-        if (teleportAction.GetStateUp(pose.inputSource))
+        
+        if (teleportAction.GetStateUp(pose.inputSource) && showPointer)
         {
             showPointer = false;
             TryTeleport();
@@ -78,7 +86,7 @@ public class Teleporter : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (showPointer)
+            if (showPointer && !usingUI)
             {
                 lineRenderer.startWidth = 0.01f;
                 lineRenderer.endWidth = 0.1f;
