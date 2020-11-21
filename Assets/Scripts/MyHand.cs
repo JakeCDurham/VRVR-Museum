@@ -10,6 +10,7 @@ public class MyHand : MonoBehaviour
     [SerializeField] public SteamVR_Action_Boolean grabAction;
     private SteamVR_Behaviour_Pose pose;
     private FixedJoint joint;
+    private bool usedInteract;
 
     private MyInteractable currentInteractable;
     private List<MyInteractable> contactInteractables = new List<MyInteractable>();
@@ -18,6 +19,7 @@ public class MyHand : MonoBehaviour
     {
         pose = GetComponent<SteamVR_Behaviour_Pose>();
         joint = GetComponent<FixedJoint>();
+        usedInteract = false;
     }
 
     // Update is called once per frame
@@ -25,12 +27,18 @@ public class MyHand : MonoBehaviour
     {
         if (grabAction.GetStateDown(pose.inputSource))
         {
-            Pickup();
+            if (!usedInteract) {
+              Pickup();
+            }
         }
 
         if (grabAction.GetStateUp(pose.inputSource))
         {
-            Drop();
+            if (usedInteract) {
+                usedInteract = false;
+            } else {
+                Drop();
+            }
         }
     }
 
@@ -64,19 +72,26 @@ public class MyHand : MonoBehaviour
             currentInteractable.activeHand.Drop();
         }
 
-        Vector3 graboffset = -currentInteractable.grabbedOffset;
-        graboffset = currentInteractable.transform.rotation * graboffset;
+        OnInteract onInteract = currentInteractable.gameObject.GetComponent<OnInteract>();
 
-        GameObject toGrab = currentInteractable.gameObject;
-        if(currentInteractable.target) {
-            toGrab = currentInteractable.target;
+        if(onInteract) {
+            usedInteract = true;
+            onInteract.Interact();
+        } else {
+            Vector3 graboffset = -currentInteractable.grabbedOffset;
+            graboffset = currentInteractable.transform.rotation * graboffset;
+
+            GameObject toGrab = currentInteractable.gameObject;
+            if(currentInteractable.target) {
+                toGrab = currentInteractable.target;
+            }
+
+            toGrab.transform.position = transform.position + graboffset;
+            
+            joint.connectedBody = toGrab.GetComponent<Rigidbody>();
+
+            currentInteractable.activeHand = this;
         }
-
-        toGrab.transform.position = transform.position + graboffset;
-        
-        joint.connectedBody = toGrab.GetComponent<Rigidbody>();
-
-        currentInteractable.activeHand = this;
     }
 
     public void Drop()

@@ -23,8 +23,10 @@ public class drawcube : MonoBehaviour
         {new Vector3(start+scale, start+scale, start+scale), new Vector3(start, start+scale, start+scale)},
         // bottom face
         {new Vector3(start+scale, start, start), new Vector3(start+scale, start, start+scale)},
-        {new Vector3(start+scale, start, start+scale), new Vector3(start, start, start+scale)}};
-        for(int i = 0; i < positions.Length; i++) {
+        {new Vector3(start+scale, start, start+scale), new Vector3(start, start, start+scale)},
+        // right face
+        {new Vector3(start+scale, start+scale, start+scale), new Vector3(start+scale, start, start+scale)}};
+        for(int i = 0; i < 12; i++) {
             makeLine(positions[i, 0], positions[i, 1]);
         }
     }
@@ -39,13 +41,25 @@ public class drawcube : MonoBehaviour
         lr.SetColors(Color.white, Color.white);
         lr.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
         lr.SetWidth(0.01f, 0.01f);
-        lr.SetPosition(0, A);
-        lr.SetPosition(1, B);
+        int numPoints = 40;
+        lr.positionCount = numPoints;
+        Vector3 step = (B - A) / ((float) (numPoints-1));
+        Vector3 current = A;
+        var points = new Vector3[numPoints];
+        Debug.Log(step);
+        for(int i = 0; i < numPoints; i++) {
+            points[i] = current;
+            current = current + step;
+            Debug.Log(current);
+        }
+        lr.SetPositions(points);
 
         Gradient gradient = new Gradient();
-        float alpha = 0.7f;
+        float alpha = 0.5f;
+        Color mygrey = new Color(0.7f, 0.7f, 0.7f);
+        Color darker = new Color(0.4f, 0.4f, 0.4f);
         gradient.SetKeys(
-            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(new Color(0.1f, 0.1f, 0.1f), 0.5f), new GradientColorKey(Color.white, 1.0f) },
+            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(mygrey, 0.05f), new GradientColorKey(darker, 0.5f), new GradientColorKey(mygrey, 0.95f), new GradientColorKey(Color.white, 1.0f) },
             new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
         );
         lr.colorGradient = gradient;
@@ -54,6 +68,6 @@ public class drawcube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.transform.forward = new Vector3(0, 1, 0);
     }
 }

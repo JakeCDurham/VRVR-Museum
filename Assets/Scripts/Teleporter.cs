@@ -17,6 +17,8 @@ public class Teleporter : MonoBehaviour
     [Range(1,1000000)][SerializeField] private float archSmoothness = 500f;
     [Range(2,10000)][SerializeField] private int archResolution = 100;
     [HideInInspector] public bool usingUI = false;
+
+    static private List<OnInteract> todoNormalState;
     
 
     private void Awake()
@@ -24,6 +26,7 @@ public class Teleporter : MonoBehaviour
         pose = GetComponent<SteamVR_Behaviour_Pose>();
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = archResolution + 1;
+        todoNormalState = new List<OnInteract>();
     }
 
     // Update is called once per frame
@@ -52,16 +55,30 @@ public class Teleporter : MonoBehaviour
 
     private void TryTeleport()
     {
+        TryTeleportTo(pointer.transform.position);
+    }
+
+    public void AddTodoNormalState(OnInteract onInteract) {
+        todoNormalState.Add(onInteract);
+    }
+
+    public void TryTeleportTo(Vector3 newPos) {
         if (!hasPosition || isTeleporting)
         {
             return;
         }
 
+        foreach(OnInteract todo in todoNormalState) {
+            Debug.Log("tried calling");
+            todo.NormalState();
+        }
+        todoNormalState = new List<OnInteract>();
+
         Transform cameraRig = SteamVR_Render.Top().origin;
         Vector3 headPosition = SteamVR_Render.Top().head.position;
         
         Vector3 groundPosition = new Vector3(headPosition.x, cameraRig.position.y, headPosition.z);
-        Vector3 translateVec = pointer.transform.position - groundPosition;
+        Vector3 translateVec = newPos - groundPosition;
         
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.position);
