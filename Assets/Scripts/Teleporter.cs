@@ -103,44 +103,49 @@ public class Teleporter : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (showPointer && !usingUI)
+            if (!hit.transform.gameObject.CompareTag("BlockRaycast"))
             {
-                lineRenderer.startWidth = 0.01f;
-                lineRenderer.endWidth = 0.1f;
-                //lineRenderer.SetPosition(0, transform.position);
-                //lineRenderer.SetPosition(1, pointer.transform.position);
-                // y=ai^2+bi+c
-                // x = delta x * i
-                // z = delta z * i
-                float deltaX = (pointer.transform.position.x - transform.position.x) / archResolution;
-                float deltaZ = (pointer.transform.position.z - transform.position.z) / archResolution;
-                float h = transform.position.y - pointer.transform.position.y;
-                float l = Vector3.Distance(
-                    new Vector3(transform.position.x, pointer.transform.position.y, transform.position.z),
-                    pointer.transform.position);
-                float a = -(h / archSmoothness * l);
-                float b = -(h / l) + -a * l;
-                float c = h;
-                Vector3 origin = new Vector3(transform.position.x,  pointer.transform.position.y , transform.position.z);
-                for (int i = 0; i < archResolution; i++)
+                if (showPointer && !usingUI)
                 {
-                    float x = i * deltaX;
-                    float y = a * Mathf.Pow(i * l/archResolution, 2) + b * i * l/archResolution + c;
-                    float z = i * deltaZ;
-                    lineRenderer.SetPosition(i, origin + new Vector3(x, y, z));
-                }
-                lineRenderer.SetPosition(archResolution, pointer.transform.position);
-            }
-            else
-            {
-                for (int i = 0; i < archResolution + 1; i++)
-                {
-                    lineRenderer.SetPosition(i, transform.position);
-                }
-            }
+                    lineRenderer.startWidth = 0.01f;
+                    lineRenderer.endWidth = 0.1f;
+                    //lineRenderer.SetPosition(0, transform.position);
+                    //lineRenderer.SetPosition(1, pointer.transform.position);
+                    // y=ai^2+bi+c
+                    // x = delta x * i
+                    // z = delta z * i
+                    float deltaX = (pointer.transform.position.x - transform.position.x) / archResolution;
+                    float deltaZ = (pointer.transform.position.z - transform.position.z) / archResolution;
+                    float h = transform.position.y - pointer.transform.position.y;
+                    float l = Vector3.Distance(
+                        new Vector3(transform.position.x, pointer.transform.position.y, transform.position.z),
+                        pointer.transform.position);
+                    float a = -(h / archSmoothness * l);
+                    float b = -(h / l) + -a * l;
+                    float c = h;
+                    Vector3 origin = new Vector3(transform.position.x, pointer.transform.position.y,
+                        transform.position.z);
+                    for (int i = 0; i < archResolution; i++)
+                    {
+                        float x = i * deltaX;
+                        float y = a * Mathf.Pow(i * l / archResolution, 2) + b * i * l / archResolution + c;
+                        float z = i * deltaZ;
+                        lineRenderer.SetPosition(i, origin + new Vector3(x, y, z));
+                    }
 
-            pointer.transform.position = hit.point;
-            return true;
+                    lineRenderer.SetPosition(archResolution, pointer.transform.position);
+                }
+                else
+                {
+                    for (int i = 0; i < archResolution + 1; i++)
+                    {
+                        lineRenderer.SetPosition(i, transform.position);
+                    }
+                }
+
+                pointer.transform.position = hit.point;
+                return true;
+            }
         }
 
         for (int i = 0; i < archResolution + 1; i++)
