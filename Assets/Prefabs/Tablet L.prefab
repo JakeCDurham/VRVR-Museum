@@ -122,9 +122,9 @@ GameObject:
   - component: {fileID: 206940080275706686}
   - component: {fileID: 6049523035068746509}
   - component: {fileID: 8530926195746655228}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: blueScreenObject(Clone)
-  m_TagString: Untagged
+  m_TagString: BlockRaycast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -493,12 +493,12 @@ PrefabInstance:
     - target: {fileID: 8523339053135973060, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_Value
-      value: 0.99943316
+      value: 0.999118
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053135973060, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_Size
-      value: 0.34473756
+      value: 0.35729238
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053135973061, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
@@ -658,7 +658,7 @@ PrefabInstance:
     - target: {fileID: 8523339053441065983, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.5029297
+      value: 0.7675781
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053441065983, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
