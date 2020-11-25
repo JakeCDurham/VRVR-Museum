@@ -108,8 +108,9 @@ public class MyHand : MonoBehaviour
             target = currentInteractable.GetComponent<Rigidbody>();
         }
 
-        target.velocity = pose.GetVelocity();
-        target.angularVelocity = pose.GetAngularVelocity();
+        float yRotation = transform.parent.transform.eulerAngles.y;
+        target.velocity = Quaternion.AngleAxis(yRotation, Vector3.up) * pose.GetVelocity();
+        target.angularVelocity = Quaternion.AngleAxis(yRotation, Vector3.up) * pose.GetAngularVelocity();
 
         joint.connectedBody = null;
 
