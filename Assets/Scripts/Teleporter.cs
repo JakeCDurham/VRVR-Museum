@@ -55,6 +55,9 @@ public class Teleporter : MonoBehaviour
 
     private void TryTeleport()
     {
+        if(!hasPosition) {
+            return;
+        }
         TryTeleportTo(pointer.transform.position);
     }
 
@@ -63,13 +66,12 @@ public class Teleporter : MonoBehaviour
     }
 
     public void TryTeleportTo(Vector3 newPos) {
-        if (!hasPosition || isTeleporting)
+        if (isTeleporting)
         {
             return;
         }
 
         foreach(OnInteract todo in todoNormalState) {
-            Debug.Log("tried calling");
             todo.NormalState();
         }
         todoNormalState = new List<OnInteract>();
