@@ -17,6 +17,8 @@ public class Teleporter : MonoBehaviour
     [Range(1,1000000)][SerializeField] private float archSmoothness = 500f;
     [Range(2,10000)][SerializeField] private int archResolution = 100;
     [HideInInspector] public bool usingUI = false;
+    [SerializeField] private UIPointer uiPointer;
+    [HideInInspector] private Teleporter otherTeleporter;
 
     static private List<OnInteract> todoNormalState;
     
@@ -27,6 +29,14 @@ public class Teleporter : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = archResolution + 1;
         todoNormalState = new List<OnInteract>();
+        if (CompareTag("rightHand"))
+        {
+            otherTeleporter = GameObject.FindGameObjectWithTag("leftHand").GetComponent<Teleporter>();
+        }
+        else
+        {
+            otherTeleporter = GameObject.FindGameObjectWithTag("rightHand").GetComponent<Teleporter>();
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +44,7 @@ public class Teleporter : MonoBehaviour
     {
         hasPosition = UpdatePointer();
         pointer.SetActive(hasPosition && showPointer && !usingUI);
-        
+
         if (usingUI)
         {
             showPointer = false;
@@ -51,6 +61,8 @@ public class Teleporter : MonoBehaviour
             showPointer = false;
             TryTeleport();
         }
+
+        uiPointer.hide = showPointer || otherTeleporter.showPointer;
     }
 
     private void TryTeleport()

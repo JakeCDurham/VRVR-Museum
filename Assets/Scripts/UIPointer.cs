@@ -14,6 +14,7 @@ public class UIPointer : MonoBehaviour
     public SteamVR_Action_Boolean LeftAction;
     [SerializeField] private SteamVR_Behaviour_Pose Leftpose = null;
     [SerializeField] private SteamVR_Behaviour_Pose Rightpose = null;
+    [HideInInspector] public bool hide = false;
 
     private LineRenderer linerenderer = null;
     private void Awake()
@@ -50,14 +51,18 @@ public class UIPointer : MonoBehaviour
         
         //Raycast
         RaycastHit hit = CreateRaycast(length);
+        Vector3 targetPosition = transform.position;
 
         //Default
-        Vector3 targetPosition = transform.position + (transform.forward * length);
-
-        //or hit
-        if (hit.collider != null)
+        if (!hide)
         {
-            targetPosition = hit.point;
+            targetPosition = transform.position + (transform.forward * length);
+
+            //or hit
+            if (hit.collider != null)
+            {
+                targetPosition = hit.point;
+            }
         }
 
         //move the dot
@@ -76,4 +81,5 @@ public class UIPointer : MonoBehaviour
         
         return hit;
     }
+
 }
