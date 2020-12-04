@@ -199,6 +199,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword intro (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8426008910395540984, guid: 631ea2a0f4f7697479b4b7b9eb69376f,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426008910395540984, guid: 631ea2a0f4f7697479b4b7b9eb69376f,
+        type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 631ea2a0f4f7697479b4b7b9eb69376f, type: 3}
 --- !u!4 &2641087092390910428 stripped

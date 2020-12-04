@@ -43,34 +43,42 @@ public class tabletSpawner : MonoBehaviour
 
     GameObject createTablet()
     {
-        GameObject tablet = Instantiate(tabletPrefab, (transform.position + transform.up * 0.3f) + transform.forward * 0.5f, transform.rotation);
-
+        Vector3 finalPos = transform.position + transform.up * 0.3f;
+        GameObject tablet = Instantiate(tabletPrefab, transform.position + transform.up * 0.2f, transform.rotation);
         tablet.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        tablet.GetComponent<Rigidbody>().isKinematic = true;
         Canvas TabletCam = tablet.GetComponentInChildren<Canvas>();
         TabletCam.worldCamera = UICam;
-        initialTabletPos = tablet.transform.position;
         tabletObjects.Add(tablet);
         TextMeshProUGUI textElement = tablet.GetComponentInChildren<TextMeshProUGUI>();
         textElement.text = text.Replace("\\n", "\n");
-        return tablet;   
+        
+
+        tablet.GetComponent<Tablet>().StartSpawn(finalPos);
+        return tablet;
+    }
+
+    bool isHandleGrabbed(string name) {
+        GameObject child = currentTablet.gameObject.transform.Find("positioning").Find(name).gameObject;
+        if (child.GetComponent<MyInteractable>() != null && child.GetComponent<MyInteractable>().isGrabbed) {
+            return true;
+        }
+        return false;
     }
 
     // Update is called once per frame
     void Update()
     {
         if(isOn) {
-            bool isGrabbed = false;
-            for(int i = 0; i < currentTablet.gameObject.transform.childCount; i++) {
-                GameObject child = currentTablet.gameObject.transform.GetChild(i).gameObject;
-                if (child.GetComponent<MyInteractable>() != null && child.GetComponent<MyInteractable>().activeHand != null) {
-                    isGrabbed = true;
-                }
-            }   
-            if (isGrabbed || ((currentTablet.gameObject.transform.position - transform.position).sqrMagnitude > 2)) {
+            bool isGrabbed = isHandleGrabbed("handleLeft") || isHandleGrabbed("handleRight");
+            
+            if (isGrabbed) {
                 // user moved the tablet from the spawner
                 isOn = false;
                 // turn on light gravity
                 currentTablet.GetComponent<Tablet>().isActive = true;
+                currentTablet.GetComponent<Tablet>().FinishSpawn();
+                currentTablet.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
         

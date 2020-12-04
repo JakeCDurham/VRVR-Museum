@@ -78,6 +78,7 @@ public class MyHand : MonoBehaviour
             usedInteract = true;
             onInteract.Interact();
         } else {
+            currentInteractable.isGrabbed = true;
             Vector3 graboffset = -currentInteractable.grabbedOffset;
             graboffset = currentInteractable.transform.rotation * graboffset;
 
@@ -116,6 +117,7 @@ public class MyHand : MonoBehaviour
 
         currentInteractable.activeHand = null;
         currentInteractable = null;
+        currentInteractable.isGrabbed = false;
     }
 
     private MyInteractable GetNearestInteractable()
