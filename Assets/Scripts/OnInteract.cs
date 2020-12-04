@@ -22,7 +22,9 @@ public class OnInteract : MonoBehaviour
     }
 
     public void Interact() {
-        BoxState();
+        if(!currentBox) {
+            BoxState();
+        }
     }
 
     private void BoxState() {
