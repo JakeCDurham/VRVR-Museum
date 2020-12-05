@@ -28,7 +28,14 @@ public class VolumeController : MonoBehaviour
         }
         foreach (AudioSource source in sources)
         {
-            source.volume = (float)volume / MAXVOLUME;
+            if(source.CompareTag("backgroundAS"))
+            {
+                source.volume = (float)volume / (float)MAXVOLUME * 0.1f;
+            }
+            else
+            {
+                source.volume = (float)volume / MAXVOLUME;
+            }
         }
         textUpdater.UpdateValue(volume.ToString());
     }

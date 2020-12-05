@@ -8,6 +8,7 @@ TagManager:
   - leftHand
   - rightHand
   - BlockRaycast
+  - backgroundAS
   layers:
   - Default
   - TransparentFX
