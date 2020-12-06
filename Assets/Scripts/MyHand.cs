@@ -10,7 +10,6 @@ public class MyHand : MonoBehaviour
     [SerializeField] public SteamVR_Action_Boolean grabAction;
     private SteamVR_Behaviour_Pose pose;
     private FixedJoint joint;
-    private bool usedInteract;
 
     private MyInteractable currentInteractable;
     private List<MyInteractable> contactInteractables = new List<MyInteractable>();
@@ -19,7 +18,6 @@ public class MyHand : MonoBehaviour
     {
         pose = GetComponent<SteamVR_Behaviour_Pose>();
         joint = GetComponent<FixedJoint>();
-        usedInteract = false;
     }
 
     // Update is called once per frame
@@ -27,18 +25,12 @@ public class MyHand : MonoBehaviour
     {
         if (grabAction.GetStateDown(pose.inputSource))
         {
-            if (!usedInteract) {
-              Pickup();
-            }
+            Pickup();
         }
 
         if (grabAction.GetStateUp(pose.inputSource))
         {
-            if (usedInteract) {
-                usedInteract = false;
-            } else {
-                Drop();
-            }
+            Drop();
         }
     }
 
@@ -75,7 +67,6 @@ public class MyHand : MonoBehaviour
         OnInteract onInteract = currentInteractable.gameObject.GetComponent<OnInteract>();
 
         if(onInteract) {
-            usedInteract = true;
             onInteract.Interact();
         } else {
             currentInteractable.isGrabbed = true;

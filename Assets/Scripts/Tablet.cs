@@ -22,7 +22,7 @@ public class Tablet : MonoBehaviour
     }
 
     public void StartSpawn(Vector3 endPosIn) {
-        spawnFramesDuration = (int) (2.0f / Time.deltaTime);
+        spawnFramesDuration = (int) (1.0f / Time.deltaTime);
         frameCounter = 0;
         startPos = gameObject.transform.position;
         endPos = endPosIn;
