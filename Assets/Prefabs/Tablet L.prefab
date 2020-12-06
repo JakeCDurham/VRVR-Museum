@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0, g: 1, b: 1, a: 1}
   outlineWidth: 1
   precomputeOutline: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0, g: 1, b: 1, a: 1}
   outlineWidth: 1
   precomputeOutline: 0
@@ -564,7 +564,7 @@ PrefabInstance:
     - target: {fileID: 8523339053135973060, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_Value
-      value: 0.99255556
+      value: 0.98863906
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053135973060, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
@@ -729,7 +729,7 @@ PrefabInstance:
     - target: {fileID: 8523339053441065983, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.6052246
+      value: 10.0802
       objectReference: {fileID: 0}
     - target: {fileID: 8523339053441065983, guid: 8b83e81c233a7a34ebf49a766a57c387,
         type: 3}
