@@ -68,6 +68,7 @@ public class MyHand : MonoBehaviour
 
         if(onInteract) {
             onInteract.Interact();
+            contactInteractables.Remove(currentInteractable);
         } else {
             currentInteractable.isGrabbed = true;
             Vector3 graboffset = -currentInteractable.grabbedOffset;
@@ -107,8 +108,8 @@ public class MyHand : MonoBehaviour
         joint.connectedBody = null;
 
         currentInteractable.activeHand = null;
-        currentInteractable = null;
         currentInteractable.isGrabbed = false;
+        currentInteractable = null;
     }
 
     private MyInteractable GetNearestInteractable()
